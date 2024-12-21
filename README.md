@@ -108,3 +108,25 @@ Apache Airflow, Python, Apache Kafka, Apache Zookeeper, Apache Spark, Cassandra,
 `cqlsh> SELECT count(*) FROM spark_streaming.created_users;`
 
 ![alt text](img/count-created-users.png) -->
+
+
+
+
+
+Copiez le nouveau fichier dans le conteneur apres modification : cp spark_stream.py spark-master:/spark_stream.py
+
+##########################################################################################"
+docker exec -it spark-master spark-submit \
+  --packages com.datastax.spark:spark-cassandra-connector_2.12:3.5.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1 \
+  --py-files file:///dependencies.zip \
+  file:///spark_stream.py
+
+#########################################################################################
+Ou nettoyez le répertoire de checkpoint avant de relancer : docker exec -it spark-master rm -rf /tmp/checkpoint
+
+
+
+#############################dbs
+docker exec -it cassandra cqlsh -u cassandra -p cassandra localhost 9042
+cqlsh> SELECT * FROM spark_streaming.created_users;
+cqlsh> SELECT count(*) FROM spark_streaming.created_users;
