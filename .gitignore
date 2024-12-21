@@ -1,0 +1,11 @@
+# Ignorer l'environnement virtuel Python
+venv/
+venvold/
+
+# Ignorer le fichier dependencies.zip
+dependencies.zip
+
+# Ignorer le dossier logs et tout son contenu
+logs/
+plugins/
+config/
